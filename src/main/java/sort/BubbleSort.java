@@ -48,11 +48,12 @@ public class BubbleSort {
     }
 
     public static void selectSort(int[] a){
-        for (int i=0;i<a.length;i++){
+        int length = a.length;
+        for (int i=0;i<length;i++){
             int min = a[i];
             int j=i+1;
             int k = i;
-            for (;j<a.length-1-i;j++){
+            for (;j<length;j++){
                 if (a[j]<min){
                     min = a[j];
                     k = j;
@@ -62,14 +63,35 @@ public class BubbleSort {
             a[i] = min;
         }
     }
-
+    public static void quickSort(int[] a,int begin,int end){
+        if (begin>=end) return;//终止条件
+        int q = partition(a, begin, end);//每次循环进行分区，元素交换
+        quickSort(a, begin, q-1);
+        quickSort(a, q+1,end );
+    }
+    private static int partition(int[] a,int begin,int end){
+        int pivot = a[end];//取最后一个元素最为分区点
+        int i = begin;
+        for (int j=begin;j<end;j++){
+            if (a[j]<pivot){
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+                i++;
+            }
+        }
+        int temp = a[i];
+        a[i] = a[end];
+        a[end] = temp;
+        return i;
+    }
     public static void main(String[] args) {
         long beginTime = System.currentTimeMillis();
         Runtime r = Runtime.getRuntime();
         r.gc();
         long startMem = r.freeMemory(); // 开始时的剩余内存
-        int[] arr = {200,53,42,22,32,4,100};
-        selectSort(arr);
+        int[] arr = {200,53,42,22,32,4,100,40};
+        quickSort(arr,0,arr.length-1);
         for (int i = 0; i <arr.length ; i++) {
             System.out.print(arr[i]+",");
         }

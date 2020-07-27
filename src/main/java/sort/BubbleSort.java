@@ -1,6 +1,7 @@
 package sort;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -85,6 +86,38 @@ public class BubbleSort {
         a[end] = temp;
         return i;
     }
+
+    public static void mergeSort(int[] a,int begin,int end){
+        if (begin>=end)return;
+        int q = (begin+end)/2;
+        mergeSort(a,begin,q);
+        mergeSort(a,q+1,end);
+        merge(a,begin,q,end);
+    }
+
+    private static void merge(int[] a,int begin,int q,int end) {
+        int[] temp = new int[a.length];
+        int i=begin,j=q+1,k=0;
+        while (i<q && j<end){
+            if (a[i]<=a[j]){
+                temp[k++] = a[i++];
+            }else {
+                temp[k++] = a[j++];
+            }
+        }
+        int start = i,stop=q;
+        if (j<end){
+            start = j;
+            stop=end;
+        }
+        while (start<=stop){
+            temp[k++] = a[start++];
+        }
+        for (i=0;i<end-begin;i++){
+            a[begin+i] = temp[i];
+        }
+    }
+
     public static void main(String[] args) {
         long beginTime = System.currentTimeMillis();
         Runtime r = Runtime.getRuntime();
@@ -92,9 +125,11 @@ public class BubbleSort {
         long startMem = r.freeMemory(); // 开始时的剩余内存
         int[] arr = {200,53,42,22,32,4,100,40};
         quickSort(arr,0,arr.length-1);
+        System.out.println(arr[arr.length-3]);
         for (int i = 0; i <arr.length ; i++) {
             System.out.print(arr[i]+",");
         }
+        System.out.println();
         long orz = startMem - r.freeMemory(); // 剩余内存 现在
         System.out.println(orz/1024/1024+"MB");
         System.out.println(System.currentTimeMillis()-beginTime+"ms");

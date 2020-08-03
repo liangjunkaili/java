@@ -15,15 +15,15 @@ public class QuickSort {
     }
     public static void quickSort_v1(int[] arr,int low,int high){
         if (low>=high)return;
-//        int p = partition(arr,low,high);
-        int p = partition_v2(arr,low,high);
+        int p = partition(arr,low,high);
+//        int p = partition_v2(arr,low,high);
         quickSort_v1(arr, low, p-1);
         quickSort_v1(arr, p+1, high);
     }
     private static int partition(int[] arr,int low,int high){
         int point = arr[high];
         int begin = low;
-        for(int i=low;i<=high-1;i++){
+        for(int i=low;i<=high;i++){
             if (arr[i]<point){
                 int temp = arr[i];
                 arr[i] = arr[begin];

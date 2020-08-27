@@ -7,16 +7,23 @@ public class Solution {
     List<String> itinerary = new LinkedList<>();
 
     public static void main(String[] args) {
-        Solution solution = new Solution();
-        List<List<String>> tickets = new ArrayList<>();
-        tickets.add(Arrays.asList("JFK","B"));
-        tickets.add(Arrays.asList("B","C"));
-        tickets.add(Arrays.asList("B","D"));
-        tickets.add(Arrays.asList("B","E"));
-        tickets.add(Arrays.asList("C","JFK"));
-        tickets.add(Arrays.asList("D","JFK"));
-        tickets.add(Arrays.asList("E","JFK"));
-        System.out.println(solution.findItinerary(tickets));
+//        Solution solution = new Solution();
+//        List<List<String>> tickets = new ArrayList<>();
+//        tickets.add(Arrays.asList("JFK","B"));
+//        tickets.add(Arrays.asList("B","C"));
+//        tickets.add(Arrays.asList("B","D"));
+//        tickets.add(Arrays.asList("B","E"));
+//        tickets.add(Arrays.asList("C","JFK"));
+//        tickets.add(Arrays.asList("D","JFK"));
+//        tickets.add(Arrays.asList("E","JFK"));
+//        System.out.println(solution.findItinerary(tickets));
+        PriorityQueue queue = new PriorityQueue();
+        queue.add(1);
+        queue.add(2);
+        queue.add(3);
+        queue.add(4);
+        queue.add(5);
+        queue.forEach(System.out::println);
     }
     public List<String> findItinerary(List<List<String>> tickets) {
         for (List<String> ticket : tickets) {

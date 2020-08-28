@@ -5,6 +5,7 @@ import java.util.Arrays;
 /**
  *
  * 练习快速排序
+ * 时间复杂度：最好（大部分情况）N*logN、最差N*N
  */
 public class QuickSort {
     public static void main(String[] args) {

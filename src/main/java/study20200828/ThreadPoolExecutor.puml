@@ -1,0 +1,10 @@
+@startuml
+class ThreadPoolExecutor
+abstract class AbstractExecutorService
+interface ExecutorService
+interface Executor
+
+Executor <|-- ExecutorService
+ExecutorService <|-- AbstractExecutorService
+AbstractExecutorService <|- ThreadPoolExecutor
+@enduml

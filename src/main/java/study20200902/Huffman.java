@@ -1,7 +1,6 @@
 package study20200902;
 
 
-import java.nio.charset.Charset;
 import java.util.*;
 
 /**
@@ -53,7 +52,6 @@ public class Huffman {
     }
     //4、得到字符的编码表
     public Map<Character,String> getEncodeMap(List<HuffmanNode> nodeList){
-//        StringBuilder sb = new StringBuilder();
         Map<Character,String> map = new HashMap<>();
         HuffmanNode curr;
         for (HuffmanNode node:nodeList){
@@ -68,7 +66,6 @@ public class Huffman {
                 curr = curr.parent;
             }
             map.put(node.c.charAt(0),encode);
-//            sb.append(encode);
         }
         return map;
     }

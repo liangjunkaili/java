@@ -2,7 +2,6 @@ package study20200908;
 
 import java.util.Arrays;
 
-import static java.lang.System.in;
 import static java.lang.System.out;
 
 /**

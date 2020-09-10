@@ -17,6 +17,7 @@ public class SortStudy {
 //        sortStudy.bubbleSort(a,a.length);
 //        sortStudy.insertSort(a,a.length);
         sortStudy.selectSort(a,a.length);
+//        sortStudy.insertSort_v2(a,a.length);
         Arrays.stream(a).forEach(out::println);
     }
     public void bubbleSort(int[] a,int n){
@@ -41,15 +42,19 @@ public class SortStudy {
         for (int i=1;i<n;i++){//未排序区间
             int value = a[i];
             int j = i-1;//已排序区间的大小
-            for (;j>=0;j--){//找到要插入的元素的位置
-                if (a[j]>value){
-                    a[j+1] = a[j];
-                }else {
-                    break;
-                }
+            for (;j>=0 && a[j]>value;j--){//找到要插入的元素的位置
+                a[j+1] = a[j];
             }
             a[j+1] = value;
         }
+    }
+    public void insertSort_v2(int[] a,int n){
+        for (int i=0; i<n; i++)
+            for (int j=i; j>0 && a[j-1]>a[j]; j--) {
+                int temp = a[j - 1];
+                a[j-1] = a[j];
+                a[j] = temp;
+            }
     }
     public void selectSort(int[] a,int n){
         for (int i=0;i<n;i++){

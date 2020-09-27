@@ -14,15 +14,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  */
 public class ThreadPool {
-    public final int corePoolSize = Runtime.getRuntime().availableProcessors();//核心线程池的大小
-    int maximumPoolSize = corePoolSize;//最大的线程池的大小
-    long keepAliveTime = 30;//线程池中超过corePoolSize的空闲线程的最大存活时间
-    TimeUnit timeUnit = TimeUnit.MILLISECONDS;//keepAliveTime的时间单位
-    BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();//阻塞任务队列
+    public static final int corePoolSize = Runtime.getRuntime().availableProcessors();//核心线程池的大小
+    static int maximumPoolSize = corePoolSize;//最大的线程池的大小
+    static long keepAliveTime = 30;//线程池中超过corePoolSize的空闲线程的最大存活时间
+    static TimeUnit timeUnit = TimeUnit.MILLISECONDS;//keepAliveTime的时间单位
+    static BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();//阻塞任务队列
     ThreadFactory threadFactory;//新建线程工厂
     RejectedExecutionHandler handler;//当任务数超过maximumPoolSize+workQueue时，会交给RejectedExecutionHandler处理
-    AtomicInteger count = new AtomicInteger(0);
-    public final ExecutorService THREAD_POOL = new ThreadPoolExecutor(
+    static AtomicInteger count = new AtomicInteger(0);
+    public static final ExecutorService THREAD_POOL = new ThreadPoolExecutor(
             corePoolSize,
             maximumPoolSize,
             keepAliveTime,

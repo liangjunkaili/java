@@ -1,9 +1,7 @@
 package graph;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class WeiXin {
     private int v;
@@ -53,19 +51,45 @@ public class WeiXin {
         List<Integer> friends = new ArrayList<>();
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[v];
+        int[] distance = new int[v];
         visited[owner] = true;
+        distance[owner] = 0;
         queue.add(owner);
-        int depth = 0;
         while (!queue.isEmpty()){
             int id = queue.poll();
             LinkedList<Integer> ownerList = adj[id];
             for (int i=0;i<ownerList.size();i++){
-                if (!visited[ownerList.get(i)]){
-                    friends.add(ownerList.get(i));
-                    queue.add(ownerList.get(i));
+                int j = ownerList.get(i);
+                if (!visited[j]){
+                    distance[j] = distance[id]+1;
+                    friends.add(j);
+                    queue.add(j);
+                    visited[j] = true;
                 }
             }
         }
+        System.out.println(friends.stream().filter((f) -> distance[f]<=n).collect(Collectors.toList()));
+    }
+    public void queryMyFriends_2(int owner,int n){
+        List<Integer> friends = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
+        boolean[] visited = new boolean[v];
+        visited[owner] = true;
+        stack.add(owner);
+        int depth = 0;
+        while (!stack.isEmpty()){
+            int id = stack.pop();
+            LinkedList<Integer> ownerList = adj[id];
+            for (int i=0;i<ownerList.size();i++){
+                int j = ownerList.get(i);
+                if (!visited[j]&&depth<n){
+                    friends.add(j);
+                    stack.add(j);
+                    visited[j] = true;
+                }
+            }
+        }
+        System.out.println(friends);
     }
     /**
      * 比如微信中有10000人，ID为0-9999
@@ -99,6 +123,8 @@ public class WeiXin {
         unDiGraph.addEdge(147,187);
         unDiGraph.addEdge(147,197);
         unDiGraph.addEdge(147,207);
-        new WeiXin(unDiGraph).bfs(0,9);
+        unDiGraph.addEdge(207,217);
+//        new WeiXin(unDiGraph).bfs(0,9);
+        new WeiXin(unDiGraph).queryMyFriends(17,3);
     }
 }

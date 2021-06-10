@@ -60,7 +60,7 @@ public class WeiXin {
             LinkedList<Integer> ownerList = adj[id];
             for (int i=0;i<ownerList.size();i++){
                 int j = ownerList.get(i);
-                if (!visited[j]){
+                if (!visited[j]&&distance[id]+1<=n){
                     distance[j] = distance[id]+1;
                     friends.add(j);
                     queue.add(j);
@@ -68,7 +68,8 @@ public class WeiXin {
                 }
             }
         }
-        System.out.println(friends.stream().filter((f) -> distance[f]<=n).collect(Collectors.toList()));
+//        System.out.println(friends.stream().filter((f) -> distance[f]<=n).collect(Collectors.toList()));
+        System.out.println(friends);
     }
     public void queryMyFriends_2(int owner,int n){
         List<Integer> friends = new ArrayList<>();
@@ -97,10 +98,18 @@ public class WeiXin {
      * 其中17有7个好友（57、77、117、127、137、147、157）
      * 147有5个好友（167、177、187、197、207）
      * 问题：找到我的3度好友（包括1度、2度）
+     * 运算结果：
+     * 100000000---》基本已经计算不出来了
+     * 10000000---》2578ms左右
+     * 1000000---》77ms左右
+     * 100000---》58ms左右
+     * 10000---》54ms左右
+     * 往下基本差不多了
      * @param args
      */
     public static void main(String[] args) {
-        UnDiGraph unDiGraph = new UnDiGraph(10000);
+        long begin = System.currentTimeMillis();
+        UnDiGraph unDiGraph = new UnDiGraph(100000000);
         unDiGraph.addEdge(7,17);
         unDiGraph.addEdge(7,27);
         unDiGraph.addEdge(7,37);
@@ -125,6 +134,8 @@ public class WeiXin {
         unDiGraph.addEdge(147,207);
         unDiGraph.addEdge(207,217);
 //        new WeiXin(unDiGraph).bfs(0,9);
-        new WeiXin(unDiGraph).queryMyFriends(17,3);
+        new WeiXin(unDiGraph).queryMyFriends(7,3);
+//        new WeiXin(unDiGraph).queryMyFriends_2(17,3);
+        System.out.println(System.currentTimeMillis() - begin + "ms");
     }
 }

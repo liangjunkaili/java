@@ -5,6 +5,10 @@ package letcode;
  * 适合用来求解最优问题
  * 多阶段决策最优解模型
  * 最优子结构、无后效性、重复子问题
+ *
+ * 什么样的问题可以用动态规划解决？
+ * 解决动态规划问题的一般思考过程是什么样的？
+ * 贪心、分治、回溯、动态规划这四种算法思想又有什么区别和联系？
  */
 public class DynamicPlan {
     private int maxW = Integer.MIN_VALUE;//求的最大值

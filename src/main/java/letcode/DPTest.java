@@ -42,6 +42,40 @@ public class DPTest {
         System.out.println(coinV2(new int[]{2,5,1},2));
         System.out.println(dpTest.longestPalindrome("cbbd"));
         System.out.println(dpTest.lengthOfLIS(new int[]{4,10,4,3,8,9}));
+        System.out.println(dpTest.numTrees(5));
+    }
+
+    /**
+     * G(n) 表示满足的总数
+     * F(i) 表示以i为根的组合数，F(i) = G(i-1)*G(n-i)
+     * G(n) = F(1) + F(2) + ...... + F(n)
+     * @param n
+     * @return
+     */
+    public int numTrees(int n) {
+        int[] g = new int[n+1];
+        g[0] = 1;
+        g[1] = 1;
+        for (int i=2;i<=n;i++){
+            for (int j=1;j<=i;j++){
+                g[i] += g[j-1] * g[i-j];
+            }
+        }
+        return g[n];
+    }
+    public int numDecodings(String s) {
+        int n = s.length();
+        int[] states = new int[n+1];
+        states[0] = 1;
+        for (int i=1;i<=n;i++){
+            if (s.charAt(i-1)!='0'){
+                states[i] += states[i-1];
+            }
+            if (i>1 && s.charAt(i-2)!='0' && ((s.charAt(i-2)-'0')*10 + (s.charAt(i-1)-'0')<=26)){
+                states[i] += states[i-2];
+            }
+        }
+        return states[n];
     }
     public int lengthOfLIS(int[] nums) {
         int n = nums.length;

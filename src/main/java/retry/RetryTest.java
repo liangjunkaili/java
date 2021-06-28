@@ -11,9 +11,9 @@ public class RetryTest implements Runnable{
     @Override
     public void run() {
         try {
-            RetryConfig.retry().call(() -> {
-                return test();
-            });
+//            RetryConfig.retry().call(() -> {
+//                return test();
+//            });
         } catch (Exception exception) {
             System.out.println("发邮件");
         }
